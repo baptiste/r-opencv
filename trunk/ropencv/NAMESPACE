@@ -1,0 +1,10 @@
+useDynLib(ropencv)
+
+## import
+
+## class
+
+## class
+
+## misc
+export(conv)
