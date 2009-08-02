@@ -13,3 +13,8 @@ conv <- function(a, b)
           as.double(b),
           as.integer(length(b)),
           ab = double(length(a) + length(b) - 1))$ab
+
+showImage <- function(file) {
+  file <- as.character(file)[1]
+  .C("showImage", file)
+}
