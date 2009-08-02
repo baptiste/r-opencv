@@ -1,8 +1,8 @@
 # configure.ac for the configuration of ropencv package
-# Jitao David Zhang <JDZhang@nextbiomotif.com>
+# Jitao David Zhang <j.zhang@dkfz.de>, 2009-08-02
 
 # initial information about the project
-AC_INIT([ropencv], 0.0.1) dnl package name, version
+AC_INIT([ropencv], 0.0.1, [j.zhang@dkfz.de])
 
 # check if the source folder is available
 AC_CONFIG_SRCDIR([src/miscC.c])
@@ -60,6 +60,7 @@ fi
           
 # substitute ROPENCV_CPPFLAGS and LIBS
 AC_SUBST(ROPENCV_CPPFLAGS)
+AC_SUBST(CPPFLAGS)
 AC_SUBST(LIBS)
 AC_CONFIG_HEADERS([src/config.h])
 
