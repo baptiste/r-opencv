@@ -8,3 +8,4 @@ useDynLib(ropencv)
 
 ## misc
 export(conv)
+export(showImage)

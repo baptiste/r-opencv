@@ -1,6 +1,10 @@
 #include <ropencv.h>
-void showImage(char **file) {
-  IplImage* img = cvLoadImage (file[1], 1);
+#include <stdio.h>
+#include <R_ext/Memory.h>
+#include <R_ext/Error.h>
+
+int showImage(char ** file) {
+  IplImage* img = cvLoadImage (file[0], 1);
   cvNamedWindow("Example1", CV_WINDOW_AUTOSIZE);
   cvShowImage("Example1", img);
   cvWaitKey(0);
