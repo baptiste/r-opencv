@@ -16,5 +16,9 @@ conv <- function(a, b)
 
 showImage <- function(file) {
   file <- as.character(file)[1]
+  ## check for existence
+  stopifnot(file.exists(file))
+  ## expand path
+  file <- path.expand(file)
   .C("showImage", file)
 }
