@@ -1,8 +1,8 @@
 Package: ropencv
 Type: Package
 Title: Interface to the Computer Vision Libarary OpenCV in R
-Version: 0.0.2
-Date: 2009-07-29
+Version: 0.0.3
+Date: 2009-08-03
 Author: Jitao David Zhang <jdzhang@NextBioMotif.com>
 Maintainer: Jitao David Zhang <jdzhang@NextBioMotif.com>
 Description: ropencv is part of the BioVision project, which aims at providing advanced image and video analysis abilities in R and Bioconductor by implementing interface to OpenCV, a popular computer vision library. Besides wrapping functions, BioVision is especially featured with biology- and bioinformatics-oriented functions and methods.

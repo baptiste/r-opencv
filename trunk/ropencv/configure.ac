@@ -2,7 +2,7 @@
 # Jitao David Zhang <j.zhang@dkfz.de>, 2009-08-02
 
 # initial information about the project
-AC_INIT([ropencv], 0.0.1, [j.zhang@dkfz.de])
+AC_INIT([ropencv], 0.0.3, [j.zhang@dkfz.de])
 
 # check if the source folder is available
 AC_CONFIG_SRCDIR([src/miscC.c])
