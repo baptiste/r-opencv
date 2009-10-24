@@ -1,10 +1,11 @@
 Package: ropencv
 Type: Package
 Title: Interface to the Computer Vision Libarary OpenCV in R
-Version: 0.0.3
+Version: 0.0.5
 Date: 2009-10-24
 Author: Jitao David Zhang <jdzhang@NextBioMotif.com>, with support of Stefan Wiemann and Wolfgang Huber
 Maintainer: Jitao David Zhang <jdzhang@NextBioMotif.com>
+SystemRequirements: Windows, UNIX/Linux, MacOS; OpenCV (>= 1.1.0); Qt (>= 4.0)
 Description: ropencv is an R/Bioconductor package providing general functionalities of real time computer vision in R, especially for the reading, writing, processing and analysis of videos. The package ropencv is part of the BioVision project, which aims at providing advanced image and video analysis abilities in R and Bioconductor, focusing on the microscopy based cellular assays and screenings.
 License: LGPL-3
 LazyLoad: yes
