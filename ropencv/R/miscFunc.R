@@ -1,11 +1,3 @@
-#.First.lib <- function(lib,pkg) {
-#  library.dynam("ropencv", pkg,lib)
-#}
-#
-#.onLoad <- function(lib, pkg) {
-#  library.dynam("ropencv", pkg,lib)
-#}
-#
 conv <- function(a, b)
        .C("convolve",
           as.double(a),
