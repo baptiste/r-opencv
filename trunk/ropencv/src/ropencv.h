@@ -5,14 +5,14 @@
   ----------------------------------------*/
 
 // package specific
-#include "display.h"
+// #include "display.h"
 
 // OpenCV
-#include "opencv/cv.h"
-#include "opencv/cvtypes.h"
-#include "opencv/highgui.h"
-#include "opencv/cxcore.h"
-#include "opencv/cxerror.h"
+#include "cv.h"
+#include "cvtypes.h"
+#include "highgui.h"
+#include "cxcore.h"
+#include "cxerror.h"
 
 // R
 #include <R.h>
