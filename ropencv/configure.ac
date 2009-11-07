@@ -8,18 +8,18 @@ AC_CONFIG_SRCDIR([src])
 CFLAGS="-Wall ${CFLAGS}"
 CXXFLAGS="-Wall ${CXXFLAGS}"
 
-PKGCONF=pkg-config
+PKGCONF=[pkg-config]
 AC_CHECK_PROG(pkgfound, [pkg-config --version], yes, no)
-if test "$pkgfound"="no"; then
-  PKGCONF=pkgconfig
-  AC_CHECK_PROG(pkgfound, [pkgconfig --version], yes, no)
-fi
+#if test "$pkgfound"="no"; then
+#  PKGCONF=pkgconfig
+#  AC_CHECK_PROG(pkgfound, [pkgconfig --version], yes, no)
+#fi
 
 if test "$pkgfound"="yes"; then
-   if `$PKGCONF --flags opencv > /dev/null`; then
+   if `$PKGCONF --cflags opencv > /dev/null`; then
      echo "** OpenCV found by $PKGCONF"
-     COMPILERFLAGS="`$PKGCONF --clfags opencv`"
-     CFLAGS="-DUSE_OPENCV ${$COMPILTERFLAGS} ${CFLAGS}"
+     COMPILERFLAGS="`$PKGCONF --cflags opencv`"
+     CFLAGS="-DUSE_OPENCV ${COMPILERFLAGS} ${CFLAGS}"
      CXXFLAGS="${COMPILERFLAGS} ${CXXFLAGS}"
      LINKERFLAGS="`$PKGCONF --libs opencv`"
      LIBS="${LINKERFLAGS} ${LIBS} ${LFALGS}"
@@ -57,8 +57,8 @@ if test -z "${R_HOME}"; then
 fi
 CC=`"${R_HOME}/bin/R" CMD config CC`
 CPP=`"${R_HOME}/bin/R" CMD config CPP`
-CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS ${CFLAGS}`
-CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS ${CXXFLAGS}`
+##CFLAGS="`"${R_HOME}/bin/R" CMD config CFLAGS` ${CFLAGS}"
+##CXXFLAGS="`"${R_HOME}/bin/R" CMD config CXXFLAGS` ${CXXFLAGS}"
 AC_PROG_CC
 AC_PROG_CPP
 
@@ -66,8 +66,8 @@ AC_PROG_CPP
 AC_SUBST(CFLAGS)
 AC_SUBST(CXXFLAGS)
 AC_SUBST(LIBS)
-
-dnl saving output variables into Makevar.in and config.R
 AC_CONFIG_HEADERS([src/config.h])
-AC_OUTPUT(src/Makevars)
 
+dnl and do substitution in the src/Makevars.in and src/config.h
+AC_CONFIG_FILES([src/Makevars])
+AC_OUTPUT
