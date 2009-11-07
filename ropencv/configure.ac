@@ -10,16 +10,16 @@ CXXFLAGS="-Wall ${CXXFLAGS}"
 
 PKGCONF=[pkg-config]
 AC_CHECK_PROG(pkgfound, [pkg-config --version], yes, no)
-#if test "$pkgfound"="no"; then
-#  PKGCONF=pkgconfig
-#  AC_CHECK_PROG(pkgfound, [pkgconfig --version], yes, no)
-#fi
+if test "$pkgfound" = "no" ; then
+  PKGCONF=pkgconfig
+  AC_CHECK_PROG(pkgfound, [pkgconfig --version], yes, no)
+fi
 
 if test "$pkgfound"="yes"; then
    if `$PKGCONF --cflags opencv > /dev/null`; then
      echo "** OpenCV found by $PKGCONF"
      COMPILERFLAGS="`$PKGCONF --cflags opencv`"
-     CFLAGS="-DUSE_OPENCV ${COMPILERFLAGS} ${CFLAGS}"
+     CFLAGS="${COMPILERFLAGS} ${CFLAGS}"
      CXXFLAGS="${COMPILERFLAGS} ${CXXFLAGS}"
      LINKERFLAGS="`$PKGCONF --libs opencv`"
      LIBS="${LINKERFLAGS} ${LIBS} ${LFALGS}"
@@ -57,8 +57,8 @@ if test -z "${R_HOME}"; then
 fi
 CC=`"${R_HOME}/bin/R" CMD config CC`
 CPP=`"${R_HOME}/bin/R" CMD config CPP`
-##CFLAGS="`"${R_HOME}/bin/R" CMD config CFLAGS` ${CFLAGS}"
-##CXXFLAGS="`"${R_HOME}/bin/R" CMD config CXXFLAGS` ${CXXFLAGS}"
+CFLAGS="`"${R_HOME}/bin/R" CMD config CFLAGS` ${CFLAGS}"
+CXXFLAGS="`"${R_HOME}/bin/R" CMD config CXXFLAGS` ${CXXFLAGS}"
 AC_PROG_CC
 AC_PROG_CPP
 
