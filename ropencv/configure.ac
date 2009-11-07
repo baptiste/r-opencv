@@ -1,54 +1,70 @@
-## configure.ac for the configuration of ropencv package
-## Jitao David Zhang <j.zhang@dkfz.de>, 2009-08-02
+# configure.ac for the configuration of ropencv package
+# Jitao David Zhang <j.zhang@dkfz.de>
 
-## initial information about the project
-AC_INIT([ropencv], 0.0.4, [j.zhang@dkfz.de])
+AC_INIT([ropencv], 0.1, [j.zhang@dkfz.de])
 
-## check if the source folder is available
-AC_CONFIG_SRCDIR([src/])
+AC_CONFIG_SRCDIR([src])
 
-## Select an optional library path
-AC_ARG_WITH([opencv-lib],
+CFLAGS="-Wall ${CFLAGS}"
+CXXFLAGS="-Wall ${CXXFLAGS}"
+
+PKGCONF=pkg-config
+AC_CHECK_PROG(pkgfound, [pkg-config --version], yes, no)
+if test "$pkgfound"="no"; then
+  PKGCONF=pkgconfig
+  AC_CHECK_PROG(pkgfound, [pkgconfig --version], yes, no)
+fi
+
+if test "$pkgfound"="yes"; then
+   if `$PKGCONF --flags opencv > /dev/null`; then
+     echo "** OpenCV found by $PKGCONF"
+     COMPILERFLAGS="`$PKGCONF --clfags opencv`"
+     CFLAGS="-DUSE_OPENCV ${$COMPILTERFLAGS} ${CFLAGS}"
+     CXXFLAGS="${COMPILERFLAGS} ${CXXFLAGS}"
+     LINKERFLAGS="`$PKGCONF --libs opencv`"
+     LIBS="${LINKERFLAGS} ${LIBS} ${LFALGS}"
+   else
+     echo "** OpenCV not found by $PKGCONF, trying command line options"
+   fi
+else
+  AC_ARG_WITH([opencv-include],
+	    AC_HELP_STRING([--with-opencv-include=INCLUDE_PATH],
+			   [the location of OpenCV header files]),
+	    [opencv_include=$withval])
+  if test [ -n "$opencv_include"] ; then
+    CFLAGS="-I${opencv_include} ${CFLAGS}"
+    CXXFLAGS="-I${opencv_include} ${CXXFLAGS}"
+  else
+    AC_MSG_ERROR("OpenCV includes not found!")
+  fi
+  
+  AC_ARG_WITH([opencv-lib],
 	    AC_HELP_STRING([--with-opencv-lib=LIB_PATH],
 		           [the location of OpenCV libraries]),
 	    [opencv_lib_path=$withval])
-if test [ -n "$opencv_lib_path" ] ; then
-  LIBS="-L{$opencv_lib_path} ${LIBS}"
-else
-  if test [ -n "${OPENCV_LIBS}" ] ; then
-    LIBS="-L${OPENCV_LIBS} ${LIBS}"
+  if test [ -n "$opencv_lib_path" ] ; then
+    LIBS="-L{$opencv_lib_path} ${LIBS}"
+  else
+    AC_MSG_ERROR("OpenCV library not found!")
   fi
 fi
 
-## use pkg-config to set flags
-AC_CHECK_PROG(pkgfound, [pkg-config --version], yes, no)
-if test "$pkgfound" = "yes" ; then
-   if `pkg-config --cflags opencv > /dev/null`; then
-     echo pkg-config found
-     COMPILERFLAGS="`pkg-config --cflags opencv`"
-     CFLAGS="-DGLIB_GETTEXT ${COMPILERFLAGS} ${CFLAGS}"
-     CXXFLAGS="-DGLIB_GETTEXT ${COMPILERFLAGS} ${CXXFLAGS}"
-     LINKERFLAGS="`pkg-config --libs opencv`"
-     LIBS="${LINKERFLAGS} ${LIBS} ${LFLAGS}"
-     LFLAGS="${LIBS}"
-   else
-     echo 'pkg-config' does not know anything about opencv
-   fi
-else
-   echo 'pkg-config' not found!   
-fi
-
-
-
-## Find the compiler and compiler flags to use
+# Find the compiler and compiler flags to use
 : ${R_HOME=`R RHOME`}
 if test -z "${R_HOME}"; then
-   AC_MSG_ERROR("could not determine R_HOME...")
+  echo "could not determine R_HOME"
+  exit 1	   
 fi
+CC=`"${R_HOME}/bin/R" CMD config CC`
+CPP=`"${R_HOME}/bin/R" CMD config CPP`
+CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS ${CFLAGS}`
+CXXFLAGS=`"${R_HOME}/bin/R" CMD config CXXFLAGS ${CXXFLAGS}`
+AC_PROG_CC
+AC_PROG_CPP
 
-## substitute ROPENCV_CPPFLAGS and LIBS
+# substitute ROPENCV_CXXFLAGS and LIBS
 AC_SUBST(CFLAGS)
-AC_SUBST(CPPFLAGS)
+AC_SUBST(CXXFLAGS)
 AC_SUBST(LIBS)
 
 dnl saving output variables into Makevar.in and config.R
