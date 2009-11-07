@@ -2,3 +2,4 @@ Release 0.0.5
 API Changes:
   + (r17) use pkg-config to detect the flags for opencv
   + (r18) '.First.Lib' and '.onLoad' (commented out earlier) are removed completely since the package has a namespace
+  + (r19) Rewrite the configure.ac to use pkg-config to detect default cflags and libs
