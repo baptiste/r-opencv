@@ -9,8 +9,12 @@ conv <- function(a, b)
 showImage <- function(file) {
   file <- as.character(file)[1]
   ## check for existence
-  stopifnot(file.exists(file))
+  if(!file.exists(file))
+      stop(file, "not found")
   ## expand path
   file <- path.expand(file)
-  .C("showImage", file)
+  a <- .Call("loadImage", file)
+  cat("SHOWING...\n")
+  .Call("showImage", a)
+  return(a)
 }
