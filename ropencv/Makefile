@@ -1,6 +1,6 @@
-R=R-devel
+R=R
 PKG          := ropencv
-PKG_VERSION  := 0.1.0
+PKG_VERSION  := 0.1.1
 
 PKG_ROOT_DIR := $(shell pwd)
 PKG_DIST_ROOT_DIR := ../$(PKG).tmp
