@@ -1,8 +1,8 @@
 Package: ropencv
 Type: Package
 Title: Interface to the Computer Vision Libarary OpenCV in R
-Version: 0.0.5
-Date: 2009-10-24
+Version: 0.1.1
+Date: 2014-03-22
 Author: Jitao David Zhang <jdzhang@NextBioMotif.com>, with support of Stefan Wiemann and Wolfgang Huber
 Maintainer: Jitao David Zhang <jdzhang@NextBioMotif.com>
 SystemRequirements: Windows, UNIX/Linux, MacOS; OpenCV (>= 1.1.0); Qt (>= 4.0)
