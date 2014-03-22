@@ -1,3 +1,7 @@
+Release 0.1.1
+  + The pointer problem is solved now by global variable & smart pointer
+  + load and show image is now demonstrated
+
 Release 0.0.5
 API Changes:
   + (r17) use pkg-config to detect the flags for opencv
