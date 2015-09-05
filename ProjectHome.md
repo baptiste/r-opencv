@@ -1,0 +1,2 @@
+# Overview #
+r-opencv is part of the BioVision project, which aims at providing advanced image and video analysis abilities in R and Bioconductor backended by OpenCV, a popular computer vision library.
